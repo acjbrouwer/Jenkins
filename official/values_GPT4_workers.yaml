@@ -1,0 +1,37 @@
+controller:
+  JCasC:
+    enabled: true
+    configScripts:
+      agents: |
+        jenkins:
+          agentProtocols:
+            - "jnlp4"
+          nodes:
+            - permanent:
+                name: "worker-1"
+                remoteFS: "/home/jenkins"
+                labelString: "worker-1"
+                mode: EXCLUSIVE
+                numExecutors: 2
+                nodeProperties:
+                  - "hudson.slaves.EnvironmentVariablesNodeProperty"
+                launcher:
+                  jnlp:
+                    workDirSettings:
+                      disabled: false
+                      internalDir: "remoting"
+                      failIfWorkDirIsMissing: false
+            - permanent:
+                name: "worker-2"
+                remoteFS: "/home/jenkins"
+                labelString: "worker-2"
+                mode: EXCLUSIVE
+                numExecutors: 2
+                nodeProperties:
+                  - "hudson.slaves.EnvironmentVariablesNodeProperty"
+                launcher:
+                  jnlp:
+                    workDirSettings:
+                      disabled: false
+                      internalDir: "remoting"
+                      failIfWorkDirIsMissing: false

@@ -8,3 +8,4 @@ Documentation:
 ## Bitnami Helm chart
 
 https://github.com/jenkinsci/helm-charts
+`kubectl apply -f role-rolebinding.yaml`

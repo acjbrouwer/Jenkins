@@ -1,1 +1,0 @@
-kubectl patch serviceaccount jenkins -n jenkins -p '{"metadata": {"labels": {"app.kubernetes.io/managed-by": "Helm"}, "annotations": {"meta.helm.sh/release-name": "jenkins", "meta.helm.sh/release-namespace": "jenkins"}}}'

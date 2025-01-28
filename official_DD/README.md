@@ -86,3 +86,20 @@ helm install jenkins -n jenkins -f jenkins-values.yaml jenkinsci/jenkins
 ```
 
 Follow the printed instructions.
+
+When this fails in the init container do:
+https://github.com/jenkinsci/helm-charts/issues/195#issuecomment-1184309342
+This is because of pv permissions specific to Docker Destkop.
+
+**Install Notes**:
+1. Get your 'admin' user password by running:
+  `kubectl exec --namespace jenkins -it svc/jenkins -c jenkins -- /bin/cat /run/secrets/additional/chart-admin-password && echo`
+2. Get the Jenkins URL to visit by running these commands in the same shell:
+  `export NODE_PORT=$(kubectl get --namespace jenkins -o jsonpath="{.spec.ports[0].nodePort}" services jenkins)`
+  `export NODE_IP=$(kubectl get nodes --namespace jenkins -o jsonpath="{.items[0].status.addresses[0].address}")`
+  `echo http://$NODE_IP:$NODE_PORT`
+
+3. Login with the password from step 1 and the username: admin
+   This may need to be http://localhost:32000
+4. Configure security realm and authorization strategy
+5. Use Jenkins Configuration as Code by specifying configScripts in your values.yaml file, see documentation: http://$NODE_IP:$NODE_PORT/configuration-as-code and examples: https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos

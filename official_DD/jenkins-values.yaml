@@ -186,7 +186,7 @@ controller:
   # Set runAsUser to 1000 to let Jenkins run as non-root user 'jenkins', which exists in 'jenkins/jenkins' docker image.
   # When configuring runAsUser to a different value than 0 also set fsGroup to the same value:
   # -- Deprecated in favor of `controller.podSecurityContextOverride`. uid that jenkins runs with.
-  runAsUser: 1000
+  runAsUser: 0
 
   # -- Deprecated in favor of `controller.podSecurityContextOverride`. uid that will be used for persistent volume.
   fsGroup: 1000
@@ -205,7 +205,9 @@ controller:
   #   supplementalGroups: [1000]
   #   capabilities: {}
   # -- Completely overwrites the contents of the pod security context, ignoring the values provided for `runAsUser`, `fsGroup`, and `securityContextCapabilities`
-  podSecurityContextOverride: ~
+  podSecurityContextOverride:
+    runAsUser: 0
+    runasNonRoot: false
 
   # -- Allow controlling the securityContext for the jenkins container
   containerSecurityContext:
